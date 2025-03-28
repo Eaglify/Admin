@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    
+    <!-- Preload CSS -->
+    <link rel="preload" href="adminlogin.css" as="style">
+    <link rel="stylesheet" href="adminlogin.css">
+</head>
+
+<body>
+    <!-- Images -->
+    <img src="assets/1.png" class="img-fluid image1" alt="Decorative Corner Design">
+    <img src="assets/4.png" class="img-fluid image2" alt="Decorative Corner Design">
+    <img src="assets/3 3.png" class="img-fluid image3" alt="Decorative Corner Design">
+    <img src="assets/5.png" class="img-fluid image4" alt="Decorative Corner Design">
+    <img src="assets/Logo.png" class="img-fluid image5" alt="App Logo">
+
+    <!-- Centered Login Form -->
+    <div class="login-container">
+        <form id="login-form">
+            <div class="input-container">
+                <img src="assets/username_icon.png" alt="Username Icon">
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            <div class="input-container">
+                <img src="assets/password_icon.png" alt="Password Icon">
+                <input type="password" id="password" placeholder="Password" required>
+                <span class="toggle-password">👁️</span>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+            <div id="loading" style="display: none; text-align: center; font-weight: bold;">Checking...</div>
+        </form>
+        <p id="message-box" style="color: red; font-weight: bold; display: none; text-align: center;"></p>
+    </div>
+
+    <!-- JavaScript -->
+    <script type="module" src="adminauthentication.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let toggleBtn = document.querySelector(".toggle-password");
+            let passwordInput = document.getElementById("password");
+            let loginForm = document.getElementById("login-form");
+            let loadingIndicator = document.getElementById("loading");
+            let messageBox = document.getElementById("message-box");
+
+            if (toggleBtn && passwordInput) {
+                toggleBtn.addEventListener("click", function () {
+                    if (passwordInput.type === "password") {
+                        passwordInput.type = "text";
+                        toggleBtn.innerHTML = "🙈";
+                    } else {
+                        passwordInput.type = "password";
+                        toggleBtn.innerHTML = "👁️";
+                    }
+                });
+            } else {
+                console.error("Error: Either '.toggle-password' button or '#password' input is missing!");
+            }
+
+            loginForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                loadingIndicator.style.display = "block"; // Show loading
+                messageBox.style.display = "none"; // Hide error messages
+
+                setTimeout(() => {
+                    loadingIndicator.style.display = "none"; // Hide loading
+                    let username = document.getElementById("username").value;
+                    let password = passwordInput.value;
+                }, 2000); // Simulated 2-second delay
+            });
+        });
+    </script>
+
+</body>
+</html>

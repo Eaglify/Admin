@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "R9YPsV2DN9cuwe4il",
+      });
+   })();
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+</head>
+
+<body>
+
+    <!-- Welcome Message -->
+    <div id="welcome-message" class="welcome-message">
+        Welcome to the Dashboard
+    </div>
+
+    <div style="position: absolute; top: 130px; left: 400px; 
+        font-size: 28px; font-weight: normal; color: rgb(0, 0, 0); 
+        font-family: 'Calibri', sans-serif;
+        z-index: 1000;">
+        <div id="welcome-message"></div>
+    </div>
+
+    <div id="name-container" style=" 
+    color: rgb(255, 255, 255) !important; /* Forces white color */">
+    </div>
+
+
+
+    <div style="position: absolute; top: 130px; left: 400px; 
+        font-size: 28px; font-weight: normal; color: black; 
+        font-family: 'Calibri', sans-serif;
+        z-index: 1000;">
+        <div id="welcome-message"></div>
+    </div>
+
+
+    <div id="user-name" style="position: absolute; top: 20px; right: 20px; 
+    font-size: 20px; font-weight: bold; color: black;
+    font-family: 'Calibri', sans-serif;">
+    </div>
+
+    <script type="module" src="userMessage.js"></script>
+
+    <div id="messages-container"></div>
+
+    <!-- Message Reply Popup -->
+<div id="message-popup" class="popup-container" style="display: none;">
+    <div class="popup">
+        <h2 style=" color: rgb(0, 0, 0) !important;">Reply to Message</h2>
+        <label style=" color: rgb(0, 0, 0) !important;">Your Email:</label>
+        <input type="email" id="user-email" value="eaglify5@gmail.com" disabled >
+
+        
+        <label style=" color: rgb(0, 0, 0) !important;">Sender's Email:</label>
+        <input type="email" id="sender-email" value="sender@example.com" disabled>
+
+        <label style=" color: rgb(0, 0, 0) !important;">Reply:</label>
+        <textarea id="reply-message" placeholder="Type your reply here..."></textarea>
+
+        <div class="popup-buttons">
+            <button id="delete-btn" style="background-color: red; color: white;">Delete</button>
+            <button id="cancel-btn">Cancel</button>
+            <button id="submit-reply-btn">Submit</button>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Burger Menu Icon -->
+    <img src="assets/burger.png" alt="Burger Menu" class="burger-menu" onclick="toggleSidebar()">
+
+
+    <!-- Sidebar and Icons -->
+    <img src="assets/1.1.png" alt="Top Left Image" class="top-left-image">
+
+
+    <img src="assets/diamondvertical1.png" alt="Bottom Image" class="bottom-left-image">
+
+    <div class="sidebar" id="sidebar">
+        <img src="assets/Eaglify Logo.png" alt="Eaglify Logo" class="sidebar-icon">
+
+
+        <img src="assets/proicons_settings.png" alt="Settings Icon" class="sidebar-icon">
+        <a href="#" class="sidebar-link unchanged-text" onclick="toggleTheme()">Dark/Light Mode</a>
+
+        <img src="assets/icon-park-outline_logout.png" alt="Logout Icon" class="sidebar-icon">
+        <a href="#" class="sidebar-link unchanged-text" id="logoutLink">Logout</a>
+        <script src="adminpage.js"></script>
+
+        <script>
+            function toggleTheme() {
+                let body = document.body;
+                if (body.classList.contains("dark-mode")) {
+                    body.classList.remove("dark-mode");
+                    body.classList.add("light-mode");
+                    localStorage.setItem("theme", "light");
+                } else {
+                    body.classList.remove("light-mode");
+                    body.classList.add("dark-mode");
+                    localStorage.setItem("theme", "dark");
+                }
+                updateTextColor();
+            }
+
+            function updateTextColor() {
+                let textElements = document.querySelectorAll(".nav-link");
+                textElements.forEach(el => {
+                    if (!el.classList.contains("unchanged-text")) { // Skip unchangeable text
+                        el.style.color = document.body.classList.contains("dark-mode") ? "white" : "black";
+                    }
+                });
+            }
+
+            // Load theme from local storage
+            window.onload = function () {
+                let savedTheme = localStorage.getItem("theme");
+                if (savedTheme) {
+                    document.body.classList.add(savedTheme);
+                } else {
+                    document.body.classList.add("light-mode");
+                }
+                updateTextColor();
+            };
+        </script>
+
+    </div>
+    <script>
+        function toggleSidebar() {
+            let sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("active");
+        }
+    </script>
+
+    <!-- CSS for Styling -->
+    <style>
+        #name-container {
+            position: fixed;
+            top: 20px;
+            right: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Calibri', sans-serif;
+            display: flex;
+            align-items: center;
+            z-index: 1200;
+            /* Ensure it stays on top */
+        }
+
+        #name-container img {
+            width: 80px;
+            /* Adjust as needed */
+            height: 80px;
+            margin-left: 0px;
+            border-radius: 10%;
+            /* Make it circular */
+        }
+
+        .nav-link {
+            position: absolute;
+            left: 100px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            font-family: 'Calibri', sans-serif;
+            text-decoration: none;
+            z-index: 1100;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-link:hover {
+            color: rgb(64, 220, 255);
+            transform: translateX(5px);
+        }
+
+        .top-left-image {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 500px;
+            /* Adjust based on your preference */
+            max-width: 90%;
+            /* Ensures it scales on smaller screens */
+            height: auto;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .bottom-left-image {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            /* Default for larger screens */
+            max-width: 90%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .bottom-left-image {
+                position: fixed;
+                transform: rotate(270deg);
+                transform-origin: center bottom;
+                /* Rotate around the bottom center */
+                bottom: 0;
+                left: 100%;
+                /* Move to the center */
+                width: 100%;
+                height: 100%;
+                /* Full width after rotation */
+                translate: -50% 0;
+                /* Center it horizontally */
+            }
+        }
+
+
+
+
+
+
+        .light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+
+        /* Ensure all text elements adjust in dark mode */
+        .dark-mode a,
+        .dark-mode .nav-link,
+        .dark-mode div,
+        .dark-mode p {
+            color: white !important;
+        }
+
+        .light-mode a,
+        .light-mode .nav-link,
+        .light-mode div,
+        .light-mode p {
+            color: black !important;
+        }
+
+        /* Ensure Home, Dark/Light Mode, and Logout always stay white */
+        .unchanged-text {
+            color: white !important;
+            /* Always stay white */
+        }
+
+        .dark-mode .unchanged-text {
+            color: white !important;
+            /* Prevents change in dark mode */
+        }
+
+        .light-mode .unchanged-text {
+            color: white !important;
+            /* Prevents change in light mode */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .burger-menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            z-index: 1200;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100vh;
+            /* Full viewport height */
+            min-height: 100%;
+            /* Ensures it covers the full height on mobile */
+            background-color: #274687;
+            transition: left 0.3s ease;
+            z-index: 1100;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            /* Allows scrolling if content overflows */
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-icon {
+            width: 40px;
+            height: 40px;
+            margin: 15px 0;
+        }
+
+        .sidebar-link {
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-family: 'Calibri', sans-serif;
+        }
+
+        .sidebar-link:hover {
+            color: rgb(64, 220, 255);
+        }
+
+        .sidebar img:first-child {
+            width: 200px;
+            /* Adjust size as needed */
+            height: 200px;
+            /* Adjust size as needed */
+            margin-bottom: 10px;
+            /* Space below */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            min-height: 100vh;
+            /* Full viewport height */
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        #messages-container {
+            width: 1000px;
+            max-height: 500px;
+            /* Adjust height as needed */
+            overflow-y: auto;
+            /* Enables scrolling */
+            padding-top: 0px;
+            /* Space for the sticky header */
+            position: relative;
+            z-index: 10;
+            margin-top: 100px;
+        }
+
+        .message-card {
+            background: #E0E0E0;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            cursor: pointer;
+        }
+
+        .dark-mode .message-card {
+            background: #024e02;
+            color: white;
+            box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .message-body {
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Sticky header that disappears */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            background: #f8f8f8;
+            /* Match your theme */
+            padding: 10px;
+            z-index: 10;
+            transition: transform 0.3s ease-out;
+        }
+
+        /* Hide header when scrolling */
+        .hidden {
+            transform: translateY(-100%);
+        }
+
+        @media (max-width: 768px) {
+            #messages-container {
+                padding: 5px;
+                /* Add some inner spacing */
+                margin: 5px;
+                /* Add space around the container */
+                max-height: 450px;
+                /* Slightly reduce height for better fit */
+                margin-top: 100px;
+            }
+
+            .message-card {
+        
+                margin: 15px;
+                /* Keep spacing between messages */
+                padding: 10px;
+                /* Adjust padding for better touch experience */
+            }
+        }
+
+
+        /* Ensures it expands correctly in case of different screen sizes */
+        @media screen and (max-height: 500px) {
+            .sidebar {
+                height: 100vh;
+                min-height: 100%;
+            }
+        }
+
+        /* Default positioning for larger screens */
+        .welcome-message {
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 36px;
+            font-weight: bold;
+            color: rgb(0, 0, 0);
+            font-family: 'Calibri', sans-serif;
+            z-index: 1000;
+            white-space: nowrap;
+            /* Prevents text from wrapping */
+        }
+
+        /* Mobile responsiveness */
+        @media screen and (max-width: 768px) {
+            .welcome-message {
+                position: fixed;
+                top: 150px;
+                /* Adjust top spacing */
+                left: 60%;
+                transform: translateX(-50%);
+                font-size: 15px;
+                text-align: left;
+                width: 90%;
+                /* Allow some spacing on small screens */
+            }
+        }
+
+        .popup-container {
+            z-index: 11;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup input,
+        .popup textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 5px;
+        }
+
+        .popup-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .popup-buttons button {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+    </style>
+
+    <!-- JavaScript to Set Welcome Message -->
+    <script type="module" src="welcomemess.js"></script>
+
+</body>
+
+</html>

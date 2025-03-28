@@ -1,0 +1,142 @@
+    /* Prevent scrolling */
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+        background: linear-gradient(45deg, red, green, blue);
+        background-size: 300% 300%;
+        animation: moveColors 5s infinite alternate;
+    }
+    
+    @keyframes moveColors {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+    }
+
+    /* Centering the Login Form */
+    .login-container {
+        position: absolute; /* Ensures it's independent */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.3);
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        width: 90%;
+        max-width: 350px;
+        backdrop-filter: blur(15px);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Input Container */
+    .input-container {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        position: relative;
+    }
+
+    /* Input Fields */
+    .input-container input {
+        border: none;
+        outline: none;
+        font-size: 16px;
+        width: 100%;
+        background: transparent;
+        padding: 5px;
+    }
+
+    /* Password Toggle */
+    .toggle-password {
+        position: absolute;
+        right: 15px;
+        cursor: pointer;
+        font-size: 18px;
+        user-select: none;
+        color: #555;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Login Button */
+    .login-button {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(to right, #ff416c, #ff4b2b);
+        color: white;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        transition: 0.3s ease;
+    }
+
+    .login-button:hover {
+        background: linear-gradient(to right, #ff4b2b, #ff416c);
+        box-shadow: 0px 4px 15px rgba(255, 75, 43, 0.3);
+        transform: translateY(-2px);
+    }
+
+    /* Image Styles */
+    .img-fluid {
+        position: absolute;
+        max-width: 100%;
+    }
+
+    /* Adjust specific image positions */
+    .image1 {
+        position: absolute;
+        top: 0px;  /* Always stay at the top */
+        right: 0px; /* Always stay at the left */
+        width: 250px; /* Adjust as needed */
+    }
+    .image2 {
+        position: absolute;
+        top: 0px;  /* Always stay at the top */
+        left: 0px; /* Always stay at the left */
+        width: 250px; /* Adjust as needed */
+    }
+    .image3 {
+        position: absolute;
+        bottom: 0px;  /* Always stay at the top */
+        left: 0px; /* Always stay at the left */
+        width: 250px; /* Adjust as needed */
+    }
+    .image4 {
+        position: absolute;
+        bottom: 0px;  /* Always stay at the top */
+        right: 0px; /* Always stay at the left */
+        width: 250px; /* Adjust as needed */
+    }
+    
+    .image5 {
+        position: absolute;
+        top: calc(50% - 100px); /* Adjust position above login */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px; /* Adjust size as needed */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+        .login-container {
+            width: 100%;
+            padding: 20px;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .login-container {
+            max-width: 320px;
+        }
+    }
