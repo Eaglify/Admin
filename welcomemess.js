@@ -28,7 +28,7 @@ window.onload = function () {
 
     // Set the welcome message based on the username
     if (username === "admin") {
-        welcomeMessage.innerHTML = "Welcome to Eaglify, Financial Advisors";
+        welcomeMessage.innerHTML = "Welcome to Eaglify, Financial Advisors!";
         fetchDevelopersImage(nameContainer);
     } else if (username === "Sabas") {
         welcomeMessage.innerHTML = "Welcome to Eaglify, Mr. Agra!";
